@@ -1,5 +1,3 @@
-// use std::io;
-// use std::io::Write;
 use std::fs;
 use std::cmp::min;
 
@@ -80,7 +78,7 @@ impl Default for MyApp {
 
 impl eframe::App for MyApp {
     fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
-		egui::CentralPanel::default().show(ctx, |ui| {
+		egui::CentralPanel::default().show(ctx, |_ui| {
 			match self.state {
 				GameState::Setup => {
 					egui::Area::new("top_left_area").movable(false).anchor(egui::Align2::LEFT_TOP, [20.0, 20.0]).show(ctx, |ui|{
@@ -215,7 +213,9 @@ impl eframe::App for MyApp {
 					
 				},
 				GameState::End => {
-					ui.heading(format!("Congratulations {}, you are the winner!", get_winner(&self.player_names, &self.player_chips, self.player_count)));
+					egui::Area::new("center_area").movable(false).anchor(egui::Align2::CENTER_CENTER, [0.0, 0.0]).show(ctx, |ui|{
+						ui.heading(format!("Congratulations {}, you are the winner!", get_winner(&self.player_names, &self.player_chips, self.player_count)));
+					});
 				},
 			}
 		});
