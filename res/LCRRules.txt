@@ -1,0 +1,12 @@
+The object of the game is to be the last player with chips.
+You can have up to 50 players with a minimum of 3.
+Each player begins with 3 chips.
+When it is your turn, you roll one die for each chip you have. The maximum is 3.
+
+If you roll:
+L -> Pass a chip to the left
+R -> Pass a chip to the right
+C -> Pass a chip to the center pot. These are now out of play.
+* -> No chips are moved.
+
+Good luck!
