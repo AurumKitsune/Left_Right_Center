@@ -270,10 +270,24 @@ impl eframe::App for MyApp {
                     .movable(false)
                     .anchor(egui::Align2::CENTER_CENTER, [0.0, 0.0])
                     .show(ctx, |ui| {
-                        ui.heading(format!(
-                            "Congratulations {}, you are the winner!",
-                            get_winner(&self.player_names, &self.player_chips, self.player_count)
-                        ));
+                        ui.vertical_centered(|ui| {
+                            ui.heading(format!(
+                                "Congratulations {}, you are the winner!",
+                                get_winner(
+                                    &self.player_names,
+                                    &self.player_chips,
+                                    self.player_count
+                                )
+                            ));
+                            ui.add_space(15.0);
+
+                            if ui.button("Restart").clicked() {
+                                self.player_names.clear();
+                                self.player_chips.clear();
+
+                                self.state = GameState::Setup;
+                            }
+                        });
                     });
             }
         });
