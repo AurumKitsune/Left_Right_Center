@@ -7,7 +7,10 @@ use eframe::egui;
 use egui_extras::image::RetainedImage;
 
 fn main() {
-    let options = eframe::NativeOptions::default();
+    let options = eframe::NativeOptions {
+		resizable: false,
+		..Default::default()
+	};
 
     eframe::run_native(
         "Left Right Center Game",
@@ -171,12 +174,14 @@ impl eframe::App for MyApp {
                             ui.add_space(20.0);
 
                             if ui.button("Continue").clicked() {
-                                if self.current_player < self.player_count - 1 {
-                                    self.current_player += 1;
-                                } else {
-                                    self.current_player = 0;
-                                    self.state = GameState::Play;
-                                }
+								if (self.player_names[self.current_player].len() > 0) {
+									if self.current_player < self.player_count - 1 {
+										self.current_player += 1;
+									} else {
+										self.current_player = 0;
+										self.state = GameState::Play;
+									}
+								}
                             }
                         });
                     });
