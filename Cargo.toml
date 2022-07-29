@@ -11,3 +11,8 @@ egui = "0.18.1"
 egui_extras = { version = "0.18.0", features = ["image"] }
 image = { version = "0.24", default-features = false, features = ["png"] }
 rand = "0.8.5"
+
+[profile.release]
+lto = true
+panic = "abort"
+codegen-units = 1
