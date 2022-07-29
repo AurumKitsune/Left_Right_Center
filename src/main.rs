@@ -1,3 +1,5 @@
+#![cfg_attr(not(debug_assertions), windows_subsystem = "windows")] // hide console window on Windows in release
+
 use std::cmp::min;
 use std::fs;
 
@@ -8,9 +10,9 @@ use egui_extras::image::RetainedImage;
 
 fn main() {
     let options = eframe::NativeOptions {
-		resizable: false,
-		..Default::default()
-	};
+        resizable: false,
+        ..Default::default()
+    };
 
     eframe::run_native(
         "Left Right Center Game",
@@ -173,15 +175,15 @@ impl eframe::App for MyApp {
                             );
                             ui.add_space(20.0);
 
-                            if ui.button("Continue").clicked() {
-								if (self.player_names[self.current_player].len() > 0) {
-									if self.current_player < self.player_count - 1 {
-										self.current_player += 1;
-									} else {
-										self.current_player = 0;
-										self.state = GameState::Play;
-									}
-								}
+                            if ui.button("Continue").clicked()
+                                && !self.player_names[self.current_player].is_empty()
+                            {
+                                if self.current_player < self.player_count - 1 {
+                                    self.current_player += 1;
+                                } else {
+                                    self.current_player = 0;
+                                    self.state = GameState::Play;
+                                }
                             }
                         });
                     });
